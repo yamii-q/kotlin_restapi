@@ -35,6 +35,6 @@ class CharacterController (private val characterService: CharacterService){
     @DeleteMapping("{id}")
     fun delete(@PathVariable id: Long): String {
         characterService.delete(id)
-        return "削除が完了しました"
+        return "Delete Complete"
     }
 }
