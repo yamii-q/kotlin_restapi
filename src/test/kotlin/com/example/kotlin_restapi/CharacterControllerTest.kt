@@ -14,12 +14,12 @@ import org.springframework.test.context.junit4.SpringRunner
 @RunWith(value = SpringRunner::class)
 @SpringBootTest
 @Sql("classpath:setup.sql")
-class CharacterRepositoryTest {
+class CharacterControllerTest {
     @Autowired
     private lateinit var characterController: CharacterController
 
     @Test
-    fun NoDataTest() {
+    fun noDataTest() {
         val characters = characterController.findAll()
         Assertions.assertThat(characters).isEmpty()
     }
@@ -36,10 +36,10 @@ class CharacterRepositoryTest {
     @Test
     fun findByIdTest() {
         val createCharacter = characterController.create(Character(username = "Kazuma", age = 16, jobs = "NEET"))
-        val findcharacter = characterController.findById(createCharacter.id ?: 0)
-        Assertions.assertThat(findcharacter.orElse(null).username).isEqualTo("Kazuma")
-        Assertions.assertThat(findcharacter.orElse(null).age).isEqualTo(16)
-        Assertions.assertThat(findcharacter.orElse(null).jobs).isEqualTo("NEET")
+        val findCharacter = characterController.findById(createCharacter.id ?: 0)
+        Assertions.assertThat(findCharacter.orElse(null).username).isEqualTo("Kazuma")
+        Assertions.assertThat(findCharacter.orElse(null).age).isEqualTo(16)
+        Assertions.assertThat(findCharacter.orElse(null).jobs).isEqualTo("NEET")
     }
 
     @Test
