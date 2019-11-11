@@ -13,25 +13,29 @@ services:
     ports:
       - 3306:3306
     volumes:
+      # 起動スクリプト
       - ./docker-compose/mysql/initdb:/docker-entrypoint-initdb.d
+      # MySQLの設定ファイル
       - ./docker-compose/mysql/config:/etc/mysql/conf.d
+      # DBの永続化
       - mysql_db:/var/lib/mysql
   app:
     container_name: spring_app
     build: ./docker-compose/spring
     depends_on:
+      # dbserverが起動してから、appを起動
       - dbserver
     ports:
       - "8080:8080"
     volumes:
       - .:/app
     environment:
+      # mysqlの接続設定 host:portはコンテナ名指定
       spring.datasource.driverClassName: "com.mysql.cj.jdbc.Driver"
       spring.datasource.url: "jdbc:mysql://dbserver/kotlin_restapi_db"
       spring.datasource.username: "user"
       spring.datasource.password: "password"
-
-
+# DBの永続化先
 volumes:
   mysql_db:
     driver: local
