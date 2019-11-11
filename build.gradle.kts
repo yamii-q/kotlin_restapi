@@ -27,10 +27,6 @@ dependencies {
 //	追加
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testCompile("org.assertj:assertj-core:3.8.0")
-//	削除
-//	testImplementation("org.springframework.boot:spring-boot-starter-test") {
-//		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-//	}
 }
 
 tasks.withType<Test> {
@@ -42,4 +38,5 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "1.8"
 	}
+
 }

@@ -1,0 +1,38 @@
+version: "3"
+services:
+  dbserver:
+    container_name: mysql5.7_kotlin_restapi
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: kotlin_restapi_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker-compose/mysql/initdb:/docker-entrypoint-initdb.d
+      - ./docker-compose/mysql/config:/etc/mysql/conf.d
+      - mysql_db:/var/lib/mysql
+  app:
+    container_name: spring_app
+    build: ./docker-compose/spring
+    depends_on:
+      - dbserver
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      spring.datasource.driverClassName: "com.mysql.cj.jdbc.Driver"
+      spring.datasource.url: "jdbc:mysql://dbserver/kotlin_restapi_db"
+      spring.datasource.username: "user"
+      spring.datasource.password: "password"
+
+
+volumes:
+  mysql_db:
+    driver: local
+
