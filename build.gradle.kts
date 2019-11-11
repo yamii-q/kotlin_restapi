@@ -27,6 +27,7 @@ dependencies {
 //	追加
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testCompile("org.assertj:assertj-core:3.8.0")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 }
 
 tasks.withType<Test> {
