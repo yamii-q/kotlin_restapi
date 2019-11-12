@@ -4,6 +4,8 @@ import com.example.kotlin_restapi.entity.Character
 import com.example.kotlin_restapi.service.CharacterService
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
