@@ -13,7 +13,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
 ---
 spring:
   profiles: docker-compose
@@ -25,3 +24,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+

@@ -26,7 +26,7 @@ services:
       # dbserverが起動してから、appを起動
       - dbserver
     ports:
-      - "8080:8080"
+      - "8081:8080"
     volumes:
       - .:/app
     environment:
