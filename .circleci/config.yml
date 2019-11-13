@@ -40,4 +40,5 @@ jobs:
 
       # run tests!
       - run: cd backend
+      - run: ls
       - run: gradle test
