@@ -30,8 +30,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: cd backend
-      - run: gradle dependencies
+      - run: cd backend && gradle dependencies
 
       - save_cache:
           paths:
@@ -39,6 +38,4 @@ jobs:
           key: v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
 
       # run tests!
-      - run: cd backend
-      - run: ls
-      - run: gradle test
+      - run: cd backend && gradle test
