@@ -39,7 +39,7 @@ backend/db.trace.db
 ## frontend ##
 frontend/.DS_Store
 frontend/node_modules
-frontend//dist
+frontend/dist
 
 # local env files
 frontend/.env.local
