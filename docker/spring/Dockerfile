@@ -1,3 +1,2 @@
 # jdkを環境にインストール
-FROM openjdk:jdk-alpine
-FROM gradle
+FROM gradle:6.0.0-jdk8

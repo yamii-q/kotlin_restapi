@@ -4,6 +4,7 @@ spring:
 
 ---
 spring:
+  profile: localhost
   datasource:
     url: jdbc:mysql://localhost:3306/kotlin_restapi_db
     username: root
@@ -13,6 +14,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+server:
+  port: 8081
 ---
 spring:
   profiles: docker-compose
@@ -24,4 +27,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+server:
+  port: 8081
 
