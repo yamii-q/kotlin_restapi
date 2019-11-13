@@ -1,7 +1,7 @@
 version: "3"
 services:
   dbserver:
-    container_name: mysql5.7_kotlin_restapi
+    container_name: mysql5.7-spring
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: kotlin_restapi_db
@@ -14,14 +14,14 @@ services:
       - 3306:3306
     volumes:
       # 起動スクリプト
-      - ./docker-compose/mysql/initdb:/docker-entrypoint-initdb.d
+      - ./docker/mysql/initdb:/docker-entrypoint-initdb.d
       # MySQLの設定ファイル
-      - ./docker-compose/mysql/config:/etc/mysql/conf.d
+      - ./docker/mysql/config:/etc/mysql/conf.d
       # DBの永続化
       - mysql_db:/var/lib/mysql
-  app:
-    container_name: spring_app
-    build: ./docker-compose/spring
+  spring:
+    container_name: backend-spring-app
+    build: ./docker/spring
     depends_on:
       # dbserverが起動してから、appを起動
       - dbserver
@@ -37,7 +37,30 @@ services:
       spring.datasource.password: "password"
     working_dir: /app
     tty: true
-    command: sh -c "java -jar -Dspring.profiles.active=docker-compose ./build/libs/kotlin_restapi-0.0.1-SNAPSHOT.jar"
+    command: sh -c "gradle build && java -jar -Dspring.profiles.active=docker-compose ./build/libs/kotlin_restapi-0.0.1-SNAPSHOT.jar"
+  vue:
+    build: ./docker/vue
+    container_name: front-vue-app
+    depends_on:
+      - spring
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    tty: true
+    command: sh -c "npm install && npm run serve"
+  nginx:
+    image: nginx
+    container_name: front-nginx
+    depends_on:
+      - vue
+    ports:
+      - 80:80
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 # DBの永続化先
 volumes:
   mysql_db:
