@@ -41,7 +41,7 @@ jobs:
       - run: cd backend && gradle test
   deploy:
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
+#      - image: circleci/openjdk:8-jdk-browsers
     working_directory: ~/repo
     environment:
       HOST_NAME: 52.199.86.36
