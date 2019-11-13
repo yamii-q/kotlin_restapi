@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <h1>{{msg}}</h1>
     <br />キャラクター名:
     <input
       v-model="character.username"
@@ -52,6 +53,7 @@ export default {
   data() {
     return {
       characters: [],
+      msg: [],
       character: {
         username: undefined,
         age: undefined,
@@ -64,18 +66,19 @@ export default {
   },
   methods: {
     refresh: async function() {
-      const res = await axios.get("http://localhost:8081/api/v1/characters");
+      const res = await axios.get(process.env.VUE_APP_API_URL_BASE + "/api/v1/characters");
       this.characters = res.data;
+      this.msg = process.env.VUE_APP_API_URL_BASE
     },
     addCharacter: async function() {
       await axios.post(
-        "http://localhost:8081/api/v1/characters",
+              process.env.VUE_APP_API_URL_BASE + "/api/v1/characters",
         this.character
       );
       await this.refresh();
     },
     deleteCharacter: async function(id) {
-      await axios.delete("http://localhost:8081/api/v1/characters/" + id);
+      await axios.delete(process.env.VUE_APP_API_URL_BASE + "/api/v1/characters" + id);
       await this.refresh();
     }
   }

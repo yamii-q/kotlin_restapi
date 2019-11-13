@@ -64,18 +64,18 @@ export default {
   },
   methods: {
     refresh: async function() {
-      const res = await axios.get("http://localhost:8081/api/v1/characters");
+      const res = await axios.get(process.env.VUE_APP_API_URL_BASE + "/api/v1/characters");
       this.characters = res.data;
     },
     addCharacter: async function() {
       await axios.post(
-        "http://localhost:8081/api/v1/characters",
+              process.env.VUE_APP_API_URL_BASE + "/api/v1/characters",
         this.character
       );
       await this.refresh();
     },
     deleteCharacter: async function(id) {
-      await axios.delete("http://localhost:8081/api/v1/characters/" + id);
+      await axios.delete(process.env.VUE_APP_API_URL_BASE + "/api/v1/characters" + id);
       await this.refresh();
     }
   }
