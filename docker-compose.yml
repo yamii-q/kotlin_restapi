@@ -38,29 +38,29 @@ services:
     working_dir: /app
     tty: true
     command: sh -c "gradle build -x test && java -jar -Dspring.profiles.active=docker-compose ./build/libs/kotlin_restapi-0.0.1-SNAPSHOT.jar"
-#  vue:
-#    build: ./docker/vue
-#    container_name: front-vue-app
-#    depends_on:
-#      - spring
-#    ports:
-#      - "8888:8888"
-#    volumes:
-#      - ./frontend:/app
-#    working_dir: /app
-#    tty: true
-#    command: sh -c "npm install && npm run serve"
-#  nginx:
-#    image: nginx
-#    container_name: front-nginx
-#    depends_on:
-#      - vue
-#    ports:
-#      - 80:80
-#    environment:
-#      - TZ=Asia/Tokyo
-#    volumes:
-#      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  vue:
+    build: ./docker/vue
+    container_name: front-vue-app
+    depends_on:
+      - spring
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    tty: true
+    command: sh -c "npm install && npm run serve"
+  nginx:
+    image: nginx
+    container_name: front-nginx
+    depends_on:
+      - vue
+    ports:
+      - 80:80
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 # DBの永続化先
 volumes:
   mysql_db:
