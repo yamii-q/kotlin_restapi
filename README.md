@@ -7,6 +7,7 @@ kotlin(backend) + vue.js(frontend)で簡単なCRUDを作成
  - axiosを用いたフロント側でのデータ処理の学習
  - docker-composeを用いたローカル環境に依存しない環境構築
  - circleciを用いた自動CI/CD(テストが成功した場合のみ、AWS EC2に自動デプロイ)
+ - test,deploy結果をslackに通知
  
 ## クイックスタート
 ```
